@@ -1,0 +1,29 @@
+<?php
+	$limit = 0;
+	extract($data);
+?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/input.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/chat.css">
+		<script type="text/javascript" src="assets/js/chat.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="wrap">
+			<div class="chat">
+				<div class="centerframe"><h1 id="chat-title"></h1></div>
+				<div class="chat-messages">
+					<div class="message">
+						<div class="sender">neomasterr</div>
+						<div class="text">Отображаются последние <?php echo $limit ?> сообщений</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
