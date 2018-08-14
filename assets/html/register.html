@@ -1,0 +1,31 @@
+<?php
+	$message = '';
+	$login = '';
+	extract($data);
+?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Register</title>
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/input.css">
+		<link rel="stylesheet" type="text/css" href="assets/css/register.css">
+	</head>
+	<body>
+		<div class="wrap">
+			<form class="register" id="registerform" method="POST" action="register.php">
+				<h1>Чат - регистрация</h1>
+				<span class="message"><?php echo $message; ?></span>
+				<label class="label">Логин</label>
+				<input type="text" name="login" placeholder="Логин" value="<?php echo $login; ?>">
+				<label>Пароль</label>
+				<input type="password" name="password" placeholder="Пароль">
+			</form>
+			<div class="buttons">
+				<a href="index.php"><button class="action">Отмена</button></a>
+				<input type="submit" form="registerform" name="submit" value="Ок">
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+
+.register {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 300px;
+}
+
+.register > h1 {
+	text-align: center;
+}
+
+.register > label {
+	display: block;
+	padding: 5px;
+	text-align: center;
+}
+
+.buttons {
+	padding: 5px;
+	text-align: center;
+}
+
+.register > span.message {
+	text-align: center;
+	display: block;
+}
