@@ -1,4 +1,4 @@
-let chatmessages;
+let sendbtn, inputbox, chatmessages;
 let lastmsg = 0;
 let login;
 
@@ -6,7 +6,42 @@ document.addEventListener('DOMContentLoaded', function() {
 	console.log('Ready');
 
 	login = getCookie('login');
+
+	sendbtn = document.querySelector('button.send');
 	chatmessages = document.querySelector('.chat-messages');
+	inputbox = document.getElementById('inputbox');
+
+	inputbox.addEventListener('keydown', function(event) {
+		if (event.keyCode === 13 && !event.ctrlKey) {
+			event.preventDefault();
+			sendbtn.click();
+		}
+	});
+
+	sendbtn.onclick = function() {
+		let text = inputbox.value.trim();
+		if (!text.length) {
+			return;
+		}
+
+		inputbox.value = '';
+
+		let params = {
+			auth: getCookie('v'),
+			message: text
+		};
+
+		httpRequest('POST', 'messages.php?act=send', obj_to_formdata(params), function(response, data) {
+			let json = JSON.parse(response);
+
+			if (json.error) {
+				console.log(json);
+			} else if (json.success) {
+				// addMessage(params.message, login, true);
+				// lastmsg = json.success;
+			}
+		}, null);
+	};
 
 	document.getElementById('chat-title').innerText = 'Чат - ' + getCookie('login');
 
@@ -64,6 +99,16 @@ function httpRequest(method, url, form, callback, data)
 	}
 	xmlHttp.open(method, url, true);
 	xmlHttp.send(form);
+}
+
+function obj_to_formdata(obj)
+{
+	formData = new FormData();
+	for (var key in obj)
+	{
+		formData.append(key, obj[key]);
+	}
+	return formData;
 }
 
 function getCookie(name) {

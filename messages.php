@@ -5,7 +5,7 @@
 	}
 
 	$act = strval($_GET['act']);
-	$acts = Array('get');
+	$acts = Array('send', 'get');
 
 	if (!in_array($act, $acts)) {
 		echo '{"error":"Wrong action"}';
@@ -20,7 +20,21 @@
 		exit;
 	}
 
-	switch ($act) {	
+	switch ($act) {
+		case 'send':
+			if (!isset($_POST['message'])) {
+				echo '{"error":"Empty message"}';
+				exit;
+			}
+			$message = mb_substr(strval($_POST['message']), 0, $config['message']['maxlength']);
+			if (!mysqli_query($db_link, 'INSERT INTO `messages` (`user`, `message`, `timestamp`) VALUES('.$user['id'].', \''.mysqli_real_escape_string($db_link, $message).'\', '.$_SERVER['REQUEST_TIME'].')'))
+			{
+				echo json_encode(Array('error' => 'Mysql error: '.mysqli_error($db_link)));
+				exit;
+			}
+
+			echo '{"success":'.mysqli_insert_id($db_link).'}';
+		break;		
 		case 'get':
 			$from = intval($_GET['from']);
 
