@@ -1,7 +1,7 @@
 # PHP simple chat
 
 ```SQL
-DB Creating
+DB struct
 
 CREATE DATABASE `neoma158_simplechat` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
